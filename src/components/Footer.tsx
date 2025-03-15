@@ -1,4 +1,5 @@
-import { Github, Twitter, Linkedin } from "lucide-react";
+
+import { Github, Twitter, Linkedin, CreditCard, DollarSign, Bitcoin } from "lucide-react";
 import { Button } from "./ui/button";
 
 const Footer = () => {
@@ -8,9 +9,9 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-white">Cardo</h3>
+            <h3 className="text-2xl font-bold text-white">Vertex Trading</h3>
             <p className="text-white/60">
-              Redefining the future of financial management with innovative solutions.
+              Empowering traders with automated solutions for consistent forex trading results.
             </p>
             <div className="flex space-x-4">
               <Button variant="ghost" size="icon" className="hover:bg-white/10">
@@ -26,39 +27,47 @@ const Footer = () => {
           </div>
           
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Product</h4>
+            <h4 className="text-lg font-semibold text-white">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Features</a></li>
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Security</a></li>
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Business</a></li>
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Enterprise</a></li>
+              <li><a href="/" className="text-white/60 hover:text-white transition-colors">Home</a></li>
+              <li><a href="/bots" className="text-white/60 hover:text-white transition-colors">Marketplace</a></li>
+              <li><a href="/how-it-works" className="text-white/60 hover:text-white transition-colors">How It Works</a></li>
+              <li><a href="/faq" className="text-white/60 hover:text-white transition-colors">FAQ</a></li>
             </ul>
           </div>
           
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Company</h4>
+            <h4 className="text-lg font-semibold text-white">Contact</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">About</a></li>
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Press</a></li>
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Blog</a></li>
+              <li className="text-white/60">support@vertextrading.com</li>
+              <li className="text-white/60">+254 700 123 456</li>
+              <li className="text-white/60">Mon-Fri: 9am - 5pm EAT</li>
+              <li><a href="/support" className="text-white/60 hover:text-white transition-colors">Contact Form</a></li>
             </ul>
           </div>
           
           <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-white">Legal</h4>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Terms</a></li>
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Privacy</a></li>
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Cookies</a></li>
-              <li><a href="#" className="text-white/60 hover:text-white transition-colors">Licenses</a></li>
-            </ul>
+            <h4 className="text-lg font-semibold text-white">Payment Methods</h4>
+            <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2 text-white/60">
+                <CreditCard className="w-5 h-5" />
+                <span>Credit Card</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60">
+                <DollarSign className="w-5 h-5" />
+                <span>M-Pesa</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60">
+                <Bitcoin className="w-5 h-5" />
+                <span>Crypto</span>
+              </div>
+            </div>
           </div>
         </div>
         
         <div className="mt-12 pt-8 border-t border-white/10">
           <p className="text-center text-white/60">
-            © 2024 Cardo. All rights reserved.
+            © 2024 Vertex Trading Bots Marketplace. All rights reserved.
           </p>
         </div>
       </div>
