@@ -1,12 +1,17 @@
 
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, ArrowRight, AlertTriangle } from "lucide-react";
 import BotRelated from "@/components/BotRelated";
+import { useToast } from "@/hooks/use-toast";
 
 const BotDetailPage = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  
   // In a real application, you would fetch the bot details based on the ID from the URL
   const bot = {
     id: "forex-fury",
@@ -35,7 +40,25 @@ const BotDetailPage = () => {
       verifiedBy: "MyFXBook"
     },
     price: "KES 2,000",
+    numericPrice: 2000,
     subscription: "Lifetime access"
+  };
+
+  const handlePurchase = () => {
+    // Extract the numeric price without the "KES " prefix and commas
+    const amount = bot.numericPrice;
+    
+    // Construct the payment URL with the amount
+    const paymentUrl = `https://121bc70e-c053-463f-b2e4-d866e4703b4b-00-t1pwtshj20ol.riker.replit.dev/payment/new?amount=${amount}&product=${encodeURIComponent(bot.name)}`;
+    
+    // Show toast notification
+    toast({
+      title: "Redirecting to payment",
+      description: `You're being redirected to complete your purchase of ${bot.name}.`,
+    });
+    
+    // Redirect to the payment URL
+    window.location.href = paymentUrl;
   };
 
   return (
@@ -71,7 +94,10 @@ const BotDetailPage = () => {
               <div className="pt-4">
                 <div className="text-2xl font-bold text-white mb-2">{bot.price}</div>
                 <div className="text-white/60 mb-6">{bot.subscription}</div>
-                <Button className="w-full py-6 text-lg bg-[#F2FF44] text-black hover:bg-[#E2EF34] flex items-center justify-center gap-2">
+                <Button 
+                  className="w-full py-6 text-lg bg-[#F2FF44] text-black hover:bg-[#E2EF34] flex items-center justify-center gap-2"
+                  onClick={handlePurchase}
+                >
                   Purchase Now
                   <ArrowRight className="w-5 h-5" />
                 </Button>
