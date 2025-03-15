@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useAuth } from "@/contexts/AuthContext";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
@@ -16,6 +17,7 @@ const SignUpPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { register } = useAuth();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,17 +44,9 @@ const SignUpPage = () => {
       return;
     }
 
-    // Simulating registration
     try {
-      // In a real app, this would be an API call to your auth service
-      console.log("Signing up with:", { name, email, password });
-      
-      // Simulate successful registration
-      localStorage.setItem("vertexUser", JSON.stringify({ 
-        email,
-        name,
-        isAuthenticated: true 
-      }));
+      // Use the register function from AuthContext
+      await register(name, email, password);
       
       toast({
         title: "Success",
@@ -60,9 +54,7 @@ const SignUpPage = () => {
       });
       
       // Redirect to dashboard
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 1000);
+      navigate("/dashboard");
     } catch (error) {
       console.error("Sign up error:", error);
       toast({

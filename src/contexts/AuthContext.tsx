@@ -5,6 +5,7 @@ interface User {
   email: string;
   name: string;
   isAuthenticated: boolean;
+  createdAt?: string;
 }
 
 interface AuthContextType {
@@ -46,7 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
-    // In a real app, this would be an API call to verify credentials
+    // In a real app with Supabase, this would call supabase.auth.signInWithPassword
     console.log("Logging in with:", { email, password });
     
     // Create a user object
@@ -54,6 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       email,
       name: email.split("@")[0],
       isAuthenticated: true,
+      createdAt: new Date().toISOString(), // Add creation timestamp
     };
     
     // Store the user in localStorage
@@ -65,7 +67,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const register = async (name: string, email: string, password: string) => {
-    // In a real app, this would be an API call to create a new user
+    // In a real app with Supabase, this would call supabase.auth.signUp
     console.log("Registering with:", { name, email, password });
     
     // Create a user object
@@ -73,10 +75,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       email,
       name,
       isAuthenticated: true,
+      createdAt: new Date().toISOString(), // Add creation timestamp
     };
     
     // Store the user in localStorage
     localStorage.setItem("vertexUser", JSON.stringify(newUser));
+    
+    // Clear any existing history data that might show up on dashboard
+    localStorage.removeItem("orderHistory");
+    localStorage.removeItem("purchasedBots");
     
     // Update state
     setUser(newUser);
@@ -84,6 +91,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = () => {
+    // In a real app with Supabase, this would call supabase.auth.signOut
+    
     // Remove user from localStorage
     localStorage.removeItem("vertexUser");
     

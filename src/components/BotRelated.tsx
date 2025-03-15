@@ -1,6 +1,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const BotRelated = () => {
   const relatedBots = [
@@ -35,6 +36,9 @@ const BotRelated = () => {
                 src={bot.image} 
                 alt={bot.name} 
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80";
+                }}
               />
             </div>
             <div className="p-4">

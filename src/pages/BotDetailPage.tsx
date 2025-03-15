@@ -7,16 +7,18 @@ import { Card } from "@/components/ui/card";
 import { CheckCircle, ArrowRight, AlertTriangle } from "lucide-react";
 import BotRelated from "@/components/BotRelated";
 import { useToast } from "@/hooks/use-toast";
+import { useEffect, useState } from "react";
 
 const BotDetailPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [lastUpdated, setLastUpdated] = useState(new Date());
   
   // In a real application, you would fetch the bot details based on the ID from the URL
   const bot = {
     id: "forex-fury",
     name: "Forex Fury",
-    image: "https://images.unsplash.com/photo-1642543348575-3f968705b6b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     description: "Forex Fury is a popular automated trading bot with a claimed 63% success rate. It specializes in short-term trades and is compatible with MetaTrader 4 (MT4) and MetaTrader 5 (MT5) platforms. It allows traders to customize risk settings, timeframes, and currency pairs.",
     features: [
       "Compatible with MT4 and MT5 platforms",
@@ -44,6 +46,15 @@ const BotDetailPage = () => {
     subscription: "Lifetime access"
   };
 
+  // Real-time system update simulation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLastUpdated(new Date());
+    }, 60000); // Update every minute
+    
+    return () => clearInterval(interval);
+  }, []);
+
   const handlePurchase = () => {
     // Extract the numeric price without the "KES " prefix and commas
     const amount = bot.numericPrice;
@@ -66,6 +77,12 @@ const BotDetailPage = () => {
       <Navbar />
       <div className="pt-28 pb-20 px-4">
         <div className="max-w-7xl mx-auto">
+          {/* System Update Banner */}
+          <div className="mb-6 p-3 bg-[#F2FF44]/20 rounded-lg text-white text-sm flex justify-between items-center">
+            <span>System last updated: {lastUpdated.toLocaleTimeString()}</span>
+            <span className="text-[#F2FF44] font-medium">Live</span>
+          </div>
+          
           {/* Bot Overview Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl">
@@ -73,6 +90,9 @@ const BotDetailPage = () => {
                 src={bot.image} 
                 alt={bot.name} 
                 className="w-full h-auto"
+                onError={(e) => {
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
+                }}
               />
               <div className="absolute top-4 right-4 bg-[#F2FF44] text-black px-3 py-1 rounded-full text-sm font-medium">
                 Verified
